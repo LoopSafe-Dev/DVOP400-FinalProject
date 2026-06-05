@@ -1,7 +1,8 @@
-# My Profile Website 
+# DVOP 400 Final Project
 
-AI-generated website created for **Introduction to DevOps**.  
-This repository demonstrates the use of Git for version control and GitHub for publishing a website.
+Personal portfolio website created for **DVOP 400 - DevOps I Final Project**.
+
+This repository demonstrates the use of Git, GitHub, Docker, branching strategies, and containerized web application deployment.
 
 ---
 
@@ -9,146 +10,210 @@ This repository demonstrates the use of Git for version control and GitHub for p
 
 The purpose of this repository is to practice and demonstrate:
 
-- Using **Git** to track changes to a project  
-- Publishing code to a **public GitHub repository**  
-- Understanding a basic **DevOps-style workflow** from local development to deployment  
+- Using Git to track changes to a project
+- Using GitHub for repository management
+- Working with feature branches and a develop branch
+- Creating and managing Pull Requests
+- Building and running applications with Docker
+- Deploying a web application through a containerized environment
+- Demonstrating DevOps concepts learned throughout the quarter
 
-This website was generated using AI tools and then managed, committed, and deployed using Git and GitHub.
+This website was developed using HTML, CSS, and JavaScript and then containerized using Docker and Nginx.
 
-### Git Setup and Workflow Steps
-The following steps were taken to set up Git and push the project to GitHub:
+---
 
-1. Created a new local project directory for the website.
-2. Initialized Git in the project using `git init`.
-3. Added website files (HTML, CSS, and JavaScript) to the repository.
-4. Staged changes using `git add .`.
-5. Committed the files with clear and descriptive commit messages.
-6. Created a public GitHub repository.
-7. Connected the local repository to GitHub using `git remote add origin`.
-8. Pushed the code to the main branch using `git push`.
-9. Edited and maintained the README.md file directly in GitHub.
-10. (Optional) Enabled GitHub Pages to host the website.
+## Git Setup and Workflow Steps
 
-### Challenges and Solutions
-One challenge was understanding how GitHub renders Markdown files and how commits work directly in the browser versus locally.  
-This was resolved by using GitHub’s Preview feature before committing changes and reviewing commit history to confirm updates were applied correctly.
+The following steps were completed during development:
 
+1. Created a new GitHub repository named **DVOP400-FinalProject**
+2. Cloned the repository to the local machine
+3. Created a local develop branch
+4. Created and switched to a feature branch named **feature/final-project**
+5. Added website files and project assets
+6. Staged project files using:
+
+```bash
+git add .
+```
+
+7. Created commits with descriptive commit messages:
+
+```bash
+git commit -m "Complete final project website and Docker setup"
+```
+
+8. Connected the local repository to GitHub
+9. Pushed local branches to GitHub
+10. Created a Pull Request to merge the feature branch into the develop branch
+
+---
+
+## Website Features
+
+The website includes:
+
+- Home Page
+- About Me Page
+- Resume Page
+- Project 1 Page
+- Project 2 Page
+- Project 3 Page
+
+### Home Page
+
+Introduces visitors to the website and provides navigation to the remaining pages.
+
+### About Me Page
+
+Includes:
+
+- Personal biography
+- Educational background
+- AWS Certified Cloud Practitioner certification
+- Professional interests
+- Personal photograph
+
+### Resume Page
+
+Includes:
+
+- Professional experience
+- Educational history
+- Certifications
+- Technical skills
+- Career objectives
 
 ---
 
 ## Project Files
 
-
-
-├── index.html        # Main homepage
-├── project1.html     # Project page 1
-├── project2.html     # Project page 2
-├── project3.html     # Project page 3
-├── styles.css        # Website styling
-└── script.js         # JavaScript functionality
-
----
-
-## GitHub Actions Continuous Deployment Setup
-
-This repository was updated to use **GitHub Actions** for continuous deployment to GitHub Pages instead of the default automatic branch publishing.
-
-### Objective
-
-The goal of this update was to transition from GitHub’s automatic Pages publishing to a custom deployment pipeline using GitHub’s official Actions workflow. This provides more control, customization, and better alignment with DevOps best practices.
+```text
+DVOP400-FinalProject
+├── index.html
+├── about.html
+├── resume.html
+├── project1.html
+├── project2.html
+├── project3.html
+├── styles.css
+├── script.js
+├── Dockerfile
+└── README.md
+```
 
 ---
 
-## Steps Completed
+## Docker Containerization
 
-### 1. Disabled Automatic GitHub Pages Publishing
-- Navigated to **Settings → Pages**
-- Changed the deployment source to **GitHub Actions**
+The website was containerized using Docker and hosted using Nginx.
 
----
+### Dockerfile Responsibilities
 
-### 2. Created Workflow Directory
-Created the following directory structure in the repository:
+The Dockerfile performs the following actions:
 
+- Uses the Nginx Alpine base image
+- Copies website files into the Nginx web directory
+- Applies proper file permissions
+- Exposes port 80 for web traffic
 
+### Build the Docker Image
 
-.github/workflows/
+```bash
+docker build -t dvop400-finalproject .
+```
 
+### Run the Container
 
----
+```bash
+docker run -d -p 8080:80 --name dvop400 dvop400-finalproject
+```
 
-### 3. Added deploy.yml Workflow
+### Verify Running Containers
 
-Created a workflow file:
+```bash
+docker ps
+```
 
+### Access the Website
 
+Open a web browser and navigate to:
 
-.github/workflows/deploy.yml
-
-
-The workflow:
-
-- Triggers on push to the `main` branch
-- Allows manual triggering via `workflow_dispatch`
-- Uses GitHub’s official Pages deployment actions
-- Uploads the repository files as a deployment artifact
-- Deploys to the `github-pages` environment
-
----
-
-## How the Deployment Works
-
-When changes are pushed to the `main` branch:
-
-1. GitHub Actions automatically runs the workflow.
-2. The workflow:
-   - Checks out the repository
-   - Configures GitHub Pages
-   - Uploads the site files as an artifact
-   - Deploys the website to the `github-pages` environment
-3. The site becomes available at the GitHub Pages URL.
+```text
+http://localhost:8080
+```
 
 ---
 
-## Manual Deployment
+## Manual Deployment Process
 
-To manually trigger deployment:
+The website can be manually deployed through Docker using the command line.
 
-1. Navigate to the **Actions** tab.
-2. Select **Deploy static content to Pages**.
-3. Click **Run workflow**.
-4. Confirm the deployment completes successfully.
+### Stop the Container
+
+```bash
+docker stop dvop400
+```
+
+### Remove the Container
+
+```bash
+docker rm dvop400
+```
+
+### Rebuild the Image
+
+```bash
+docker build -t dvop400-finalproject .
+```
+
+### Launch a New Container
+
+```bash
+docker run -d -p 8080:80 --name dvop400 dvop400-finalproject
+```
+
+This process allows updates to be deployed after changes are made to the website source files.
 
 ---
 
 ## Challenges Encountered
 
-- Initial push was rejected because the remote repository contained commits not present locally.
-- Resolved by running:
+Several challenges were encountered during development:
 
+- GitHub authentication required the use of a Personal Access Token (PAT)
+- Docker initially returned a 403 Forbidden error caused by file permission issues
+- Website navigation required updates to support all project pages
+- Resume content needed to be converted into HTML format
+- Docker container testing was required to verify successful deployment
 
-
-git pull origin main --rebase
-
-
-- Windows file locking during rebase required manual cleanup of temporary Git rebase directories.
-- After resolving these issues, the workflow successfully deployed the site.
-
----
-
-## Live Website
-
-The deployed website is available at:
-
-https://loopsafe-dev.github.io/My-Profile-Website/
+These issues were resolved through troubleshooting, configuration changes, and testing.
 
 ---
 
 ## DevOps Concepts Demonstrated
 
-- Continuous Deployment (CD)
-- GitHub Actions Workflow Configuration
-- YAML-based pipeline setup
-- Version control with Git
-- CI/CD troubleshooting and debugging
-- Deployment environment management
+- Version Control with Git
+- GitHub Repository Management
+- Branching Strategies
+- Pull Requests
+- Source Control Workflows
+- Docker Containerization
+- Nginx Web Hosting
+- Manual Deployment
+- Application Packaging
+- Troubleshooting and Debugging
+- Continuous Integration Concepts
+- Deployment Automation Concepts
+
+---
+
+## Author
+
+**Jackson Hanks**
+
+AWS Certified Cloud Practitioner
+
+DevOps Student
+
+Spokane Community College
