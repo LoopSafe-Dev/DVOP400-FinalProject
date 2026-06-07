@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - develop
+      - feature/final-project
+  workflow_dispatch:
 
 jobs:
   docker:
